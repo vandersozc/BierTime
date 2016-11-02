@@ -10,8 +10,6 @@ CREATE TABLE public.cervejas(
    CONSTRAINT pk_cervejas PRIMARY KEY (id)
 );
 
-CREATE SEQUENCE public.seq_cervejas;
-
 CREATE TABLE public.cervejarias (
    id bigint, 
    nome character varying(80),
@@ -23,4 +21,5 @@ CREATE TABLE public.cervejarias (
 );
 
 CREATE SEQUENCE public.seq_cervejarias;
+CREATE SEQUENCE public.seq_cervejas;
 
