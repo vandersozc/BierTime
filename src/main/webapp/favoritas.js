@@ -13,11 +13,19 @@
                 var linha = registros[index];
                 var modelo = templateTable;
 
+                //modelo = modelo.replace(/\{\{id\}\}/g, linha.id);
+                //modelo = modelo.replace(/\{\{codigo\}\}/g, index + 1);
+                //modelo = modelo.replace(/\{\{nome\}\}/g, linha.nome);
+                //modelo = modelo.replace(/\{\{tipo\}\}/g, linha.tipo);
+                //modelo = modelo.replace(/\{\{familia\}\}/g, linha.familia);
+
                 modelo = modelo.replace(/\{\{id\}\}/g, linha.id);
                 modelo = modelo.replace(/\{\{codigo\}\}/g, index + 1);
-                modelo = modelo.replace(/\{\{nome\}\}/g, linha.nome);
-                modelo = modelo.replace(/\{\{tipo\}\}/g, linha.tipo);
-                modelo = modelo.replace(/\{\{familia\}\}/g, linha.familia);
+                modelo = modelo.replace(/\{\{cerveja\}\}/g, linha.cerveja);
+                modelo = modelo.replace(/\{\{usuario\}\}/g, linha.usuario);
+                modelo = modelo.replace(/\{\{pontuacao\}\}/g, linha.pontuacao);
+                modelo = modelo.replace(/\{\{curtida\}\}/g, linha.curtida);
+                modelo = modelo.replace(/\{\{comentario\}\}/g, linha.comentario);
 
                 response += modelo;
             }
@@ -25,7 +33,7 @@
         }
 
         var _carrega = function () {
-            $.getJSON('api/cervejas', function (dados) {
+            $.getJSON('api/favoritas', function (dados) {
                 _preencheTable(dados);
             });
         }
@@ -35,7 +43,7 @@
     }
 
     $(function () {
-        window.ctrl = favoritaControler();
+        window.favorita = favoritaControler();
     });
 
 })();

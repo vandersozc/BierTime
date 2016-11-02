@@ -17,7 +17,8 @@ public class FavoritaDao {
     private static final String INSERT = "INSERT INTO favoritas (id, usuario, cerveja, pontuacao, curtida, comentario) VALUES (?, ?, ?, ?, ?, ?)";
     private static final String UPDATE = "UPDATE favoritas SET pontuacao=?, curtida=?, comentario=? ";
     private static final String DELETE = "DELETE FROM favoritas ";
-    private static final String SELECT = "SELECT id, usuario, cerveja, pontuacao, curtida, comentario FROM favoritas ";
+    //private static final String SELECT = "SELECT f.id, f.i_usuario, f.i_cerveja, f.pontuacao, f.curtida, f.comentario, c.nome, c.tipo, c.familia FROM favoritas AS f join cervejas AS c on f.i_cerveja = c.id ";
+    private static final String SELECT = "SELECT id, i_usuario, i_cerveja, pontuacao, curtida, comentario FROM favoritas ";
     private static final String WHEREID = "WHERE id=? ";
     private static final String SEQUENCE = "SELECT NEXTVAL('seq_favoritas') ";
     private static final String ORDERBY = "ORDER BY pontuacao desc ";
@@ -119,8 +120,8 @@ public class FavoritaDao {
     private Favorita parse(ResultSet resultSet) throws SQLException {
         Favorita favorita = new Favorita();
         favorita.setId(resultSet.getLong("id"));
-        favorita.setUsuario(resultSet.getLong("usuario"));
-        favorita.setCerveja(resultSet.getLong("cerveja"));
+        favorita.setUsuario(resultSet.getLong("i_usuario"));
+        favorita.setCerveja(resultSet.getLong("i_cerveja"));
         favorita.setPontuacao(resultSet.getLong("pontuacao"));
         favorita.setCurtida(resultSet.getString("curtida"));
         favorita.setComentario(resultSet.getString("comentario"));
