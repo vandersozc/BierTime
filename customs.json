@@ -1,0 +1,19 @@
+{
+    "elements": {
+        "title": {}
+    },
+    "attributes": {
+        "charset": {
+            "context": "meta"
+        },
+        "name": {
+            "context": "meta"
+        },
+        "aria-expanded": {
+            "context": "button"
+        },
+        "http-equiv": {
+            "context": "meta"
+        }
+    }
+}

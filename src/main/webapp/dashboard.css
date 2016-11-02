@@ -1,0 +1,177 @@
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 300px;
+  color: #5a5a5a;
+}
+
+
+/* Carousel base class */
+.carousel {
+  height: 220px;
+  margin-bottom: 60px;
+}
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+/*Botão central do carrousel*/
+.carousel-indicators  .active {
+  background-color: #B0C4DE;
+}
+
+/* Itens do carousel */
+.carousel .item {
+  height: 220px;
+  background-color: #C0C0C0;
+}
+
+@media (min-width: 768px) {
+  .carousel-caption p {
+    margin-bottom: 20px;
+    font-size: 21px;
+    line-height: 1.4;
+  }
+}
+
+.opcoes .img-circle {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.opcoes .btn {
+    width: 140px;
+    height: 35px;
+    margin: 0 auto;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    color: white;
+    font-family: calibri;
+    text-align: center;
+}
+
+/*
+ * Global add-ons
+ */
+
+.sub-header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+/*
+ * Top navigation
+ * Hide default border to remove 1px line.
+ */
+.navbar-fixed-top {
+  border: 0;
+}
+
+/*
+ * Sidebar
+ */
+
+/* Hide for mobile, show later */
+.sidebar {
+  display: none;
+}
+@media (min-width: 768px) {
+  .sidebar {
+    position: fixed;
+    top: 51px;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    padding: 20px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    background-color: #f5f5f5;
+    border-right: 1px solid #eee;
+  }
+}
+
+/* Sidebar navigation */
+.nav-sidebar {
+  margin-right: -21px; /* 20px padding + 1px border */
+  margin-bottom: 20px;
+  margin-left: -20px;
+}
+.nav-sidebar > li > a {
+  padding-right: 20px;
+  padding-left: 20px;
+}
+
+body#cervejas .nav-sidebar > .cervejas > a,
+body#cervejas .nav-sidebar > .cervejas > a:hover,
+body#cervejas .nav-sidebar > .cervejas > a:focus,
+body#cervejarias .nav-sidebar > .cervejarias > a,
+body#cervejarias .nav-sidebar > .cervejarias > a:hover,
+body#cervejarias .nav-sidebar > .cervejarias > a:focus,
+body#favoritas .nav-sidebar > .favoritas > a,
+body#favoritas .nav-sidebar > .favoritas > a:hover,
+body#favoritas .nav-sidebar > .favoritas > a:focus,
+body#home .nav-sidebar > .home > a,
+body#home .nav-sidebar > .home > a:hover,
+body#home .nav-sidebar > .home > a:focus {
+  color: #FFFFFF;
+  background-color: #A4A4A4;
+}
+
+
+/*
+ * Main content
+ */
+
+.main {
+  padding: 20px;
+}
+@media (min-width: 768px) {
+  .main {
+    padding-right: 40px;
+    padding-left: 40px;
+  }
+}
+.main .page-header {
+  margin-top: 0;
+}
+
+
+/*
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
+
+.glyphicon-home{
+  font-size:25px;
+  color:#0174DF
+}
+
+ h3 {
+  text-align: center;
+}
+ p {
+  text-align: center;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+
+    <title>BierTime</title>
+
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  <body id="cervejarias">
+    <nav id="menu-superior-cadastro" 
+         class="navbar navbar-inverse navbar-fixed-top">
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div id="menu-lateral" class="col-sm-3 col-md-2 sidebar"></div>
+        <div id="divForm" class="col-sm-9 col-md-10 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h2 class="page-header col-sm-10">Cadastro de cervejarias</h2>
+          <button id="btnAdicionar"
+                  onclick="cervejaria.habilitaCampos()"
+                  type="button" 
+                  class="btn btn-success col-sm-2"> + Cervejaria
+          </button>
+          <form id="form-cadastro" class="form-horizontal">
+            <input type="hidden" name="id">
+            <div class="form-group">
+              <label for="nome" class="col-sm-12">Nome da cervejaria</label>
+              <div class="col-sm-12">
+                <input id="nomeCervejaria"
+                       type="text"  
+                       name="nome" 
+                       class="form-control" 
+                       disabled="disabled">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-12" for="tipo">Localização</label>
+              <div class="col-sm-12">
+                <input id="localizacaoCervejaria"
+                       class="form-control" 
+                       type="text" 
+                       name="localizacao"
+                       disabled="disabled">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-6" for="estado">UF</label>
+              <label class="col-sm-6" for="pais">País</label>
+              <div class="col-sm-6">
+                <input id="ufCervejaria"
+                       class="form-control" 
+                       type="text" 
+                       name="estado"
+                       disabled="disabled">
+              </div>
+              <div class="col-sm-6">
+                <input id="paisCervejaria"
+                       class="form-control" 
+                       type="text" 
+                       name="pais"
+                       disabled="disabled">
+              </div>
+            </div>
+
+            <div class="btn-group text-right">
+              <button id="btnSalvar" 
+                      type="button" 
+                      class="btn btn-primary"
+                      disabled="disabled">Salvar
+              </button>
+              <button type="reset" 
+                      class="btn btn-primary">Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Cervejarias</h1>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Cod.</th>
+                  <th>Nome</th>
+                  <th>Local</th>
+                  <th>Estado</th>
+                  <th>País</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{id}}</td>
+                  <td>{{nome}}</td>
+                  <td>{{localizacao}}</td>
+                  <td>{{estado}}</td>
+                  <td>{{pais}}</td>
+                  <td>
+                    <a onclick="cervejaria.edit({{id}})" href="#divForm">
+                      <button type="button" 
+                              class="btn btn-info btn-xs">Editar
+                      </button>
+                    </a>
+                    <a onclick="cervejaria.remove({{id}})" href="#divForm">
+                      <button type="button" 
+                              class="btn btn-danger btn-xs">Excluir
+                      </button>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+    <script src="cervejarias.js"></script>
+    <script src="assets/js/vendor/holder.min.js"></script>
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>

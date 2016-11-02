@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="favicon.ico">
+
+    <title>BierTime</title>
+
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="dashboard.css" rel="stylesheet">
+    <!--[if lt IE 9]><script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <![endif]-->
+  </head>
+
+  <body id="cervejas">
+    <nav id="menu-superior-cadastro" 
+         class="navbar navbar-inverse navbar-fixed-top">
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div id="menu-lateral" class="col-sm-3 col-md-2 sidebar"></div>
+        <div id="divForm" class="col-sm-9 col-md-10 main">
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h2 class="page-header col-sm-10">Cadastro de rótulos</h2>
+          <button id="btnAdicionar" 
+                  type="button"
+                  onclick="ctrl.habilitaCampos()" 
+                  class="btn btn-success col-sm-2"> + Cerveja
+          </button>
+          <form id="form-cadastro" class="form-horizontal">
+            <input type="hidden" name="id">
+            <div class="form-group">
+              <label for="nome" class="col-sm-12">Nome da cerveja</label>
+              <div class="col-sm-12">
+                <input id="nomeCerveja"
+                       type="text" 
+                       name="nome" 
+                       class="form-control"
+                       disabled="disabled">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-12" for="tipo">Tipo da cerveja</label>
+              <div class="col-sm-12">
+                <input id="tipoCerveja"
+                       class="form-control" 
+                       type="text" 
+                       name="tipo"
+                       disabled="disabled">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-12" for="familia">Família</label>
+              <div class="col-sm-12">
+                <input id="familiaCerveja"
+                       class="form-control" 
+                       type="text" 
+                       name="familia"
+                       disabled="disabled">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-sm-4" 
+                     for="amargor">
+                     Amargor (<a href="#" data-toggle="tooltip" 
+                                 title="International Bittenerss Units(IBU) - Escala mundial de amargor da cerverja!">IBU%</a>)
+              </label>
+              <label class="col-sm-4" 
+                     for="cor">
+                     Cor (<a href="#" data-toggle="tooltip" 
+                             title="European Brewing Convention(EBC) - Escala européia de medição de cor da cerveja!">EBC%</a>)
+              </label>
+              <label class="col-sm-4" 
+                     for="teor">
+                     Teor alcoólico (<a href="#" data-toggle="tooltip" 
+                                        title="Alcohol by Volume(ABV) - Percentual em volume da quantidade de álcool!">ABV%</a>)
+              </label>
+              <div class="col-sm-4">
+                <input id="amargorCerveja"
+                       class="form-control" 
+                       type="text" 
+                       name="amargor"
+                       disabled="disabled">
+              </div>
+              <div class="col-sm-4">
+                <input id="corCerveja"
+                       class="form-control" 
+                       type="text" 
+                       name="cor"
+                       disabled="disabled">
+              </div>
+              <div class="col-sm-4">
+                <input id="teorCerveja"
+                       class="form-control" 
+                       type="text" 
+                       name="teor"
+                       disabled="disabled">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-sm-12" for="observacao">Observações</label>
+              <div class="col-sm-12">
+                <textarea id="observacaoCerveja"
+                          cols="110" 
+                          rows="2" 
+                          name="observacao" 
+                          maxlength="1000"
+                          disabled="disabled">
+                </textarea>
+              </div>
+            </div>
+
+            <div class="btn-group text-right">
+              <button id="btnSalvar" 
+                      type="button" 
+                      class="btn btn-primary"
+                      disabled="disabled">Salvar
+              </button>
+              <button type="reset" 
+                      class="btn btn-primary">Cancelar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Cervejas</h1>
+          <div class="table-responsive">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Cod.</th>
+                  <th>Nome</th>
+                  <th>Tipo</th>
+                  <th>Família</th>
+                  <th>Amargor</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{codigo}}</td>
+                  <td>{{nome}}</td>
+                  <td>{{tipo}}</td>
+                  <td>{{familia}}</td>
+                  <td>{{amargor}}</td>
+                  <td>
+                    <a onclick="ctrl.edit({{id}})" href="#divForm">
+                      <button type="button" 
+                              class="btn btn-info btn-xs">Editar
+                      </button>
+                    </a>
+                    <a onclick="ctrl.remove({{id}})" href="#divForm">
+                      <button type="button" 
+                              class="btn btn-danger btn-xs">Excluir
+                      </button>
+                    </a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="main.js"></script>
+    <script src="cervejas.js"></script>
+    <script src="assets/js/vendor/holder.min.js"></script>
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body>
+</html>
