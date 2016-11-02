@@ -31,7 +31,7 @@
           <h2 class="page-header col-sm-10">Cadastro de rótulos</h2>
           <button id="btnAdicionar" 
                   type="button"
-                  onclick="ctrl.habilitaCampos()" 
+                  onclick="cerveja.controlaCampos()" 
                   class="btn btn-success col-sm-2"> + Cerveja
           </button>
           <form id="form-cadastro" class="form-horizontal">
@@ -155,12 +155,12 @@
                   <td>{{familia}}</td>
                   <td>{{amargor}}</td>
                   <td>
-                    <a onclick="ctrl.edit({{id}})" href="#divForm">
+                    <a onclick="cerveja.editar({{id}})" href="#divForm">
                       <button type="button" 
                               class="btn btn-info btn-xs">Editar
                       </button>
                     </a>
-                    <a onclick="ctrl.remove({{id}})" href="#divForm">
+                    <a onclick="cerveja.remover({{id}})" href="#divForm">
                       <button type="button" 
                               class="btn btn-danger btn-xs">Excluir
                       </button>

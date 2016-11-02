@@ -17,11 +17,7 @@
 
         var templateTable;
 
-        var _add = function () {
-            _preencheForm(new Cerveja());
-        }
-
-        function _habilitaCampos() {
+        function _controlaCampos() {
             document.getElementById("nomeCerveja").disabled = false;
             document.getElementById("tipoCerveja").disabled = false;
             document.getElementById("familiaCerveja").disabled = false;
@@ -32,7 +28,7 @@
             document.getElementById("btnSalvar").disabled = false;
         }
 
-        var _preencheForm = function (cerveja) {
+        var _preencheFormulario = function (cerveja) {
             $('input[name=id]').val(cerveja.id);
             $('input[name=nome]').val(cerveja.nome);
             $('input[name=tipo]').val(cerveja.tipo);
@@ -43,7 +39,7 @@
             $('textarea[name=observacao]').val(cerveja.observacao);
         }
 
-        var _limpaForm = function () {
+        var _limpaFormulario = function () {
             $('input[name=id]').val(undefined);
             $('input[name=nome]').val(undefined);
             $('input[name=tipo]').val(undefined);
@@ -54,15 +50,7 @@
             $('textarea[name=observacao]').val(undefined);
         }
 
-        var _save = function () {
-            var parametros = $('#form-cadastro').serialize();
-            $.post('api/cervejas', parametros, function (data) {
-                _carrega();
-                _limpaForm();
-            });
-        }
-
-        var _preencheTable = function (registros) {
+        var _preencheTabela = function (registros) {
             templateTable = templateTable || $('table.table tbody').html();
 
             var response = '';
@@ -83,13 +71,26 @@
             $('table.table tbody').html(response);
         }
 
-        var _edit = function (id) {
-            $.getJSON('api/cervejas?id=' + id, function (registro) {
-                _preencheForm(registro);
+        var _adicionar = function () {
+            _preencheFormulario(new Cerveja());
+        }
+
+        var _salvar = function () {
+            var parametros = $('#form-cadastro').serialize();
+            $.post('api/cervejas', parametros, function (data) {
+                _carrega();
+                _limpaFormulario();
             });
         }
 
-        var _remove = function (id) {
+        var _editar = function (id) {
+            _controlaCampos();
+            $.getJSON('api/cervejas?id=' + id, function (registro) {
+                _preencheFormulario(registro);
+            });
+        }
+
+        var _remover = function (id) {
             var confirmaExclusao = confirm('tem certeza que deseja excluir o registro?');
             if (confirmaExclusao) {
                 $.ajax({
@@ -103,29 +104,29 @@
 
         var _carrega = function () {
             $.getJSON('api/cervejas', function (dados) {
-                _preencheTable(dados);
+                _preencheTabela(dados);
             });
         }
 
         _carrega();
 
         return {
-            add: _add,
-            save: _save,
-            edit: _edit,
-            remove: _remove,
-            habilitaCampos: _habilitaCampos,
+            adicionar: _adicionar,
+            salvar: _salvar,
+            editar: _editar,
+            remover: _remover,
+            controlaCampos: _controlaCampos,
         }
     }
 
     $(function () {
-        window.ctrl = cervejaControler();
+        window.cerveja = cervejaControler();
         $('#btnSalvar').click(function () {
-            ctrl.save();
+            cerveja.salvar();
         });
         $('#btnAdicionar').click(function () {
-            ctrl.habilitaCampos();
-            ctrl.add();
+            cerveja.controlaCampos();
+            cerveja.adicionar();
         });
     });
 

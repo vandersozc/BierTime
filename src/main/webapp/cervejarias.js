@@ -14,19 +14,15 @@
 
         var templateTable;
 
-        var _add = function () {
-            _preencheForm(new Cervejaria());
+        function _controlaCampos(valor) {
+            document.getElementById("nomeCervejaria").disabled = valor;
+            document.getElementById("localizacaoCervejaria").disabled = valor;
+            document.getElementById("ufCervejaria").disabled = valor;
+            document.getElementById("paisCervejaria").disabled = valor;
+            document.getElementById("btnSalvar").disabled = valor;
         }
 
-        function _habilitaCampos() {
-            document.getElementById("nomeCervejaria").disabled = false;
-            document.getElementById("localizacaoCervejaria").disabled = false;
-            document.getElementById("ufCervejaria").disabled = false;
-            document.getElementById("paisCervejaria").disabled = false;
-            document.getElementById("btnSalvar").disabled = false;
-        }
-
-        var _preencheForm = function (cervejaria) {
+        var _preencheFormulario = function (cervejaria) {
             $('input[name=id]').val(cervejaria.id);
             $('input[name=nome]').val(cervejaria.nome);
             $('input[name=localizacao]').val(cervejaria.localizacao);
@@ -34,7 +30,7 @@
             $('input[name=pais]').val(cervejaria.pais);
         }
 
-        var _limpaForm = function () {
+        var _limpaFormulario = function () {
             $('input[name=id]').val(undefined);
             $('input[name=nome]').val(undefined);
             $('input[name=localizacao]').val(undefined);
@@ -42,24 +38,16 @@
             $('input[name=pais]').val(undefined);
         }
 
-        var _save = function () {
-            var parametros = $('#form-cadastro').serialize();
-            $.post('api/cervejarias', parametros, function (data) {
-                _carrega();
-                _limpaForm();
-            });
-        }
-
-        var _preencheTable = function (registros) {
+        var _preencheTabela = function (registros) {
             templateTable = templateTable || $('table.table tbody').html();
-
             var response = '';
 
             for (var index = 0; index < registros.length; index++) {
                 var linha = registros[index];
                 var modelo = templateTable;
 
-                modelo = modelo.replace(/\{\{id\}\}/g, index + 1);
+                modelo = modelo.replace(/\{\{id\}\}/g, linha.id);
+                modelo = modelo.replace(/\{\{codigo\}\}/g, index + 1);
                 modelo = modelo.replace(/\{\{nome\}\}/g, linha.nome);
                 modelo = modelo.replace(/\{\{localizacao\}\}/g, linha.localizacao);
                 modelo = modelo.replace(/\{\{estado\}\}/g, linha.estado);
@@ -70,13 +58,27 @@
             $('table.table tbody').html(response);
         }
 
-        var _edit = function (id) {
-            $.getJSON('api/cervejarias?id=' + id, function (registro) {
-                _preencheForm(registro);
+        var _adicionar = function () {
+            _preencheFormulario(new Cervejaria());
+        }
+
+        var _salvar = function () {
+            var parametros = $('#form-cadastro').serialize();
+            $.post('api/cervejarias', parametros, function (data) {
+                _carrega();
+                _limpaFormulario();
+                _controlaCampos(true);
             });
         }
 
-        var _remove = function (id) {
+        var _editar = function (id) {
+            _controlaCampos(false);
+            $.getJSON('api/cervejarias?id=' + id, function (registro) {
+                _preencheFormulario(registro);
+            });
+        }
+
+        var _remover = function (id) {
             var confirmaExclusao = confirm('tem certeza que deseja excluir o registro?');
             if (confirmaExclusao) {
                 $.ajax({
@@ -90,29 +92,30 @@
 
         var _carrega = function () {
             $.getJSON('api/cervejarias', function (dados) {
-                _preencheTable(dados);
+                _preencheTabela(dados);
             });
         }
 
         _carrega();
 
         return {
-            add: _add,
-            save: _save,
-            edit: _edit,
-            remove: _remove,
-            habilitaCampos: _habilitaCampos,
+            adicionar: _adicionar,
+            salvar: _salvar,
+            editar: _editar,
+            remover: _remover,
+            controlaCampos: _controlaCampos,
         }
+
     }
 
     $(function () {
         window.cervejaria = cervejariaControler();
         $('#btnSalvar').click(function () {
-            cervejaria.save();
+            cervejaria.salvar();
         });
         $('#btnAdicionar').click(function () {
-            cervejaria.habilitaCampos();
-            cervejaria.add();
+            cervejaria.controlaCampos();
+            cervejaria.adicionar();
         });
     });
 
