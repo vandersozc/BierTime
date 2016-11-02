@@ -17,15 +17,15 @@
 
         var templateTable;
 
-        function _controlaCampos() {
-            document.getElementById("nomeCerveja").disabled = false;
-            document.getElementById("tipoCerveja").disabled = false;
-            document.getElementById("familiaCerveja").disabled = false;
-            document.getElementById("amargorCerveja").disabled = false;
-            document.getElementById("corCerveja").disabled = false;
-            document.getElementById("teorCerveja").disabled = false;
-            document.getElementById("observacaoCerveja").disabled = false;
-            document.getElementById("btnSalvar").disabled = false;
+        function _controlaCampos(valor) {
+            document.getElementById("nomeCerveja").disabled = valor;
+            document.getElementById("tipoCerveja").disabled = valor;
+            document.getElementById("familiaCerveja").disabled = valor;
+            document.getElementById("amargorCerveja").disabled = valor;
+            document.getElementById("corCerveja").disabled = valor;
+            document.getElementById("teorCerveja").disabled = valor;
+            document.getElementById("observacaoCerveja").disabled = valor;
+            document.getElementById("btnSalvar").disabled = valor;
         }
 
         var _preencheFormulario = function (cerveja) {
@@ -71,6 +71,15 @@
             $('table.table tbody').html(response);
         }
 
+        var _somenteNumero = function(e){
+            var tecla=(window.event)?event.keyCode:e.which;   
+        if((tecla>47 && tecla<58)) return true;
+            else{
+                if (tecla==8 || tecla==0) return true;
+                    else  return false;
+                }
+        }
+
         var _adicionar = function () {
             _preencheFormulario(new Cerveja());
         }
@@ -80,11 +89,12 @@
             $.post('api/cervejas', parametros, function (data) {
                 _carrega();
                 _limpaFormulario();
+                _controlaCampos(true);
             });
         }
 
         var _editar = function (id) {
-            _controlaCampos();
+            _controlaCampos(false);
             $.getJSON('api/cervejas?id=' + id, function (registro) {
                 _preencheFormulario(registro);
             });
@@ -116,6 +126,7 @@
             editar: _editar,
             remover: _remover,
             controlaCampos: _controlaCampos,
+            somenteNumero: _somenteNumero,
         }
     }
 
