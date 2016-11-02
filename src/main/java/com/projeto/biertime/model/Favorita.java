@@ -6,14 +6,11 @@ import java.util.Map;
 public class Favorita implements Parseable {
     
     private Long id;
-    private Long usuario;
-    private Long cerveja;
+    private Usuario usuario;
+    private Cerveja cerveja;
     private Long pontuacao;
     private String curtida;
     private String comentario;
-
-    public Favorita() {
-    }
 
     public Long getId() {
         return id;
@@ -23,19 +20,19 @@ public class Favorita implements Parseable {
         this.id = id;
     }
 
-    public Long getUsuario() {
+    public Usuario getUsuario() {
         return usuario;
     }
 
-    public void setUsuario(Long usuario) {
+    public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
 
-    public Long getCerveja() {
+    public Cerveja getCerveja() {
         return cerveja;
     }
 
-    public void setCerveja(Long cerveja) {
+    public void setCerveja(Cerveja cerveja) {
         this.cerveja = cerveja;
     }
 
@@ -65,19 +62,14 @@ public class Favorita implements Parseable {
 
     @Override
     public String toString() {
-        return String.format("{\"id\":%s, "
-                + "\"usuario\":\"%s\", "
-                + "\"cerveja\":\"%s\", "
-                + "\"pontuacao\":\"%s\", "
-                + "\"curtida\":\"%s\", "
-                + "\"comentario\":\"%s\"}", id, usuario, cerveja, pontuacao, curtida, comentario);
+        return String.format("{\"id\":%s, \"pontuacao\":\"%s\", \"cerveja\": %s,\"usuario\": %s, \"curtida\":\"%s\", \"comentario\":\"%s\"}", id, pontuacao, cerveja, usuario, curtida, comentario);
     }
 
     @Override
     public void parse(Map<String, String> dados) {
         id = Utils.parseLong(dados.get("id"));
-        usuario = Utils.parseLong(dados.get("usuario"));
-        cerveja = Utils.parseLong(dados.get("cerveja"));
+        usuario = new Usuario(Utils.parseLong(dados.get("usuario")));
+        cerveja = new Cerveja(Utils.parseLong(dados.get("cerveja")));
         pontuacao = Utils.parseLong(dados.get("pontuacao"));
         curtida = dados.get("curtida");
         comentario = dados.get("comentario");

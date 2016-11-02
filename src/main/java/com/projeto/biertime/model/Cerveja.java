@@ -16,6 +16,10 @@ public class Cerveja implements Parseable {
 
     public Cerveja() {
     }
+    
+    public Cerveja(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;

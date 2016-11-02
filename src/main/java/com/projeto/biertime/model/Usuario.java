@@ -11,6 +11,10 @@ public class Usuario implements Parseable {
 
     public Usuario() {
     }
+    
+    public Usuario(Long id) {
+        this.id = id;
+    }
 
     public Long getId() {
         return id;

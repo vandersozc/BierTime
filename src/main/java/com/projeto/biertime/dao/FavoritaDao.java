@@ -29,8 +29,8 @@ public class FavoritaDao {
             try (Connection connection = ConectionUtil.getConn()) {
                 try (PreparedStatement stm = connection.prepareStatement(INSERT)) {
                     stm.setLong(1, favorita.getId());
-                    stm.setLong(2, favorita.getUsuario());
-                    stm.setLong(3, favorita.getCerveja());
+                    stm.setLong(2, favorita.getUsuario().getId());
+                    stm.setLong(3, favorita.getCerveja().getId());
                     stm.setLong(4, favorita.getPontuacao());
                     stm.setString(5, favorita.getCurtida());
                     stm.setString(6, favorita.getComentario());
@@ -48,8 +48,8 @@ public class FavoritaDao {
     public Favorita update(Favorita favorita) {
         try (Connection connection = ConectionUtil.getConn()) {
             try (PreparedStatement stm = connection.prepareStatement(UPDATE + WHEREID)) {
-                stm.setLong(1, favorita.getUsuario());
-                stm.setLong(2, favorita.getCerveja());
+                stm.setLong(1, favorita.getUsuario().getId());
+                stm.setLong(2, favorita.getCerveja().getId());
                 stm.setLong(3, favorita.getPontuacao());
                 stm.setString(4, favorita.getCurtida());
                 stm.setString(5, favorita.getComentario());
@@ -118,10 +118,14 @@ public class FavoritaDao {
     }
 
     private Favorita parse(ResultSet resultSet) throws SQLException {
+        UsuarioDao usuarioDao = new UsuarioDao();
+        CervejaDao cervejaDao = new CervejaDao();
+        
         Favorita favorita = new Favorita();
+        
         favorita.setId(resultSet.getLong("id"));
-        favorita.setUsuario(resultSet.getLong("i_usuario"));
-        favorita.setCerveja(resultSet.getLong("i_cerveja"));
+        favorita.setUsuario(usuarioDao.find(resultSet.getLong("i_usuario")));
+        favorita.setCerveja(cervejaDao.find(resultSet.getLong("i_cerveja")));
         favorita.setPontuacao(resultSet.getLong("pontuacao"));
         favorita.setCurtida(resultSet.getString("curtida"));
         favorita.setComentario(resultSet.getString("comentario"));
