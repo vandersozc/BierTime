@@ -101,7 +101,7 @@
         }
 
         var _remover = function (id) {
-            var confirmaExclusao = confirm('tem certeza que deseja excluir o registro?');
+            var confirmaExclusao = confirm('Tem certeza que deseja excluir o registro?');
             if (confirmaExclusao) {
                 $.ajax({
                     url: 'api/cervejas?id=' + id,

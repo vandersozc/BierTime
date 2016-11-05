@@ -1,6 +1,8 @@
 package com.projeto.biertime.dao;
 
 import com.projeto.biertime.model.Cerveja;
+import com.projeto.biertime.model.Favorita;
+import com.projeto.biertime.model.Usuario;
 import com.projeto.biertime.util.ConectionUtil;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -39,7 +41,10 @@ public class CervejaDao {
                     stm.execute();
                 }
             }
-            return find(cerveja.getId());
+            Cerveja cervejaSaved = find(cerveja.getId());
+            geraFavoritas(cervejaSaved);
+            return cervejaSaved;
+            
         } catch (SQLException ex) {
             Logger.getLogger(CervejaDao.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -133,4 +138,15 @@ public class CervejaDao {
         
         return cerveja;
     }
+    
+    private void geraFavoritas(Cerveja cerveja) {
+        FavoritaDao favoritaDao = new FavoritaDao();
+        Favorita favorita = new Favorita();
+        
+        favorita.setCerveja(cerveja);
+        favorita.setPontuacao(1L);
+        favorita.setCurtida("S");
+        
+        favoritaDao.create(favorita); 
+    } 
 }

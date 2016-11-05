@@ -6,7 +6,7 @@ import java.util.Map;
 public class Favorita implements Parseable {
     
     private Long id;
-    private Usuario usuario;
+    //private Usuario usuario;
     private Cerveja cerveja;
     private Long pontuacao;
     private String curtida;
@@ -20,13 +20,13 @@ public class Favorita implements Parseable {
         this.id = id;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
+//    public Usuario getUsuario() {
+//        return usuario;
+//    }
+//
+//    public void setUsuario(Usuario usuario) {
+//        this.usuario = usuario;
+//    }
 
     public Cerveja getCerveja() {
         return cerveja;
@@ -62,13 +62,13 @@ public class Favorita implements Parseable {
 
     @Override
     public String toString() {
-        return String.format("{\"id\":%s, \"pontuacao\":\"%s\", \"cerveja\": %s,\"usuario\": %s, \"curtida\":\"%s\", \"comentario\":\"%s\"}", id, pontuacao, cerveja, usuario, curtida, comentario);
+        return String.format("{\"id\":%s, \"pontuacao\":\"%s\", \"cerveja\": %s, \"curtida\":\"%s\", \"comentario\":\"%s\"}", id, pontuacao, cerveja, curtida, comentario);
     }
 
     @Override
     public void parse(Map<String, String> dados) {
         id = Utils.parseLong(dados.get("id"));
-        usuario = new Usuario(Utils.parseLong(dados.get("usuario")));
+        //usuario = new Usuario(Utils.parseLong(dados.get("usuario")));
         cerveja = new Cerveja(Utils.parseLong(dados.get("cerveja")));
         pontuacao = Utils.parseLong(dados.get("pontuacao"));
         curtida = dados.get("curtida");

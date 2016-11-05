@@ -14,11 +14,10 @@ import java.util.logging.Logger;
 
 public class FavoritaDao {
 
-    private static final String INSERT = "INSERT INTO favoritas (id, usuario, cerveja, pontuacao, curtida, comentario) VALUES (?, ?, ?, ?, ?, ?)";
-    private static final String UPDATE = "UPDATE favoritas SET pontuacao=?, curtida=?, comentario=? ";
+    private static final String INSERT = "INSERT INTO favoritas (id, i_cerveja, pontuacao, curtida, comentario) VALUES (?, ?, ?, ?, ?)";
+    private static final String UPDATE = "UPDATE favoritas SET i_cerveja =?, pontuacao=?, curtida=?, comentario=? ";
     private static final String DELETE = "DELETE FROM favoritas ";
-    //private static final String SELECT = "SELECT f.id, f.i_usuario, f.i_cerveja, f.pontuacao, f.curtida, f.comentario, c.nome, c.tipo, c.familia FROM favoritas AS f join cervejas AS c on f.i_cerveja = c.id ";
-    private static final String SELECT = "SELECT id, i_usuario, i_cerveja, pontuacao, curtida, comentario FROM favoritas ";
+    private static final String SELECT = "SELECT id, i_cerveja, pontuacao, curtida, comentario FROM favoritas ";
     private static final String WHEREID = "WHERE id=? ";
     private static final String SEQUENCE = "SELECT NEXTVAL('seq_favoritas') ";
     private static final String ORDERBY = "ORDER BY pontuacao desc ";
@@ -29,11 +28,11 @@ public class FavoritaDao {
             try (Connection connection = ConectionUtil.getConn()) {
                 try (PreparedStatement stm = connection.prepareStatement(INSERT)) {
                     stm.setLong(1, favorita.getId());
-                    stm.setLong(2, favorita.getUsuario().getId());
-                    stm.setLong(3, favorita.getCerveja().getId());
-                    stm.setLong(4, favorita.getPontuacao());
-                    stm.setString(5, favorita.getCurtida());
-                    stm.setString(6, favorita.getComentario());
+                    //stm.setLong(2, favorita.getUsuario().getId());
+                    stm.setLong(2, favorita.getCerveja().getId());
+                    stm.setLong(3, favorita.getPontuacao());
+                    stm.setString(4, favorita.getCurtida());
+                    stm.setString(5, favorita.getComentario());
 
                     stm.execute();
                 }
@@ -48,12 +47,12 @@ public class FavoritaDao {
     public Favorita update(Favorita favorita) {
         try (Connection connection = ConectionUtil.getConn()) {
             try (PreparedStatement stm = connection.prepareStatement(UPDATE + WHEREID)) {
-                stm.setLong(1, favorita.getUsuario().getId());
-                stm.setLong(2, favorita.getCerveja().getId());
-                stm.setLong(3, favorita.getPontuacao());
-                stm.setString(4, favorita.getCurtida());
-                stm.setString(5, favorita.getComentario());
-                stm.setLong(6, favorita.getId());
+               // stm.setLong(1, favorita.getUsuario().getId());
+                stm.setLong(1, favorita.getCerveja().getId());
+                stm.setLong(2, favorita.getPontuacao());
+                stm.setString(3, favorita.getCurtida());
+                stm.setString(4, favorita.getComentario());
+                stm.setLong(5, favorita.getId());
                 
                 stm.execute();
             }
@@ -124,7 +123,7 @@ public class FavoritaDao {
         Favorita favorita = new Favorita();
         
         favorita.setId(resultSet.getLong("id"));
-        favorita.setUsuario(usuarioDao.find(resultSet.getLong("i_usuario")));
+        //favorita.setUsuario(usuarioDao.find(resultSet.getLong("i_usuario")));
         favorita.setCerveja(cervejaDao.find(resultSet.getLong("i_cerveja")));
         favorita.setPontuacao(resultSet.getLong("pontuacao"));
         favorita.setCurtida(resultSet.getString("curtida"));

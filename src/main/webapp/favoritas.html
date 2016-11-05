@@ -25,77 +25,97 @@
                 <div id="menu-lateral" class="col-sm-3 col-md-2 sidebar"></div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <h2 class="page-header">Cervejas favoritas</h2>
+
+                    <form id="formFavorita" class="form-horizontal">
+                        <input type="hidden" name="id">
+                        <input type="hidden" name="cerveja">
+                        <input type="hidden" name="pontuacao">
+                        <input type="hidden" name="curtida">
+
+                        <div class="form-group">
+                              <div class="col-sm-2">
+                                <label for="tipo">Péssima</label>
+                                <a id="ponto1" style='color: yellow' href="#divForm" title="Pontuar">
+                                        <i class="glyphicon glyphicon-star"></i>
+                                    </a>
+                              </div>
+                              <div class="col-sm-2">
+                                <label for="tipo">Ruim</label>
+                                <a id="ponto2" style='color: yellow' href="#divForm" title="Pontuar">
+                                        <i class="glyphicon glyphicon-star"></i>
+                                    </a>
+                              </div>
+                              <div class="col-sm-2">
+                                <label for="tipo">Boa</label>
+                                <a id="ponto3" style='color: yellow' href="#divForm" title="Pontuar">
+                                        <i class="glyphicon glyphicon-star"></i>
+                                    </a>
+                              </div>
+                              <div class="col-sm-2">
+                                <label for="tipo">Ótima</label>
+                                <a id="ponto4" style='color: yellow' href="#divForm" title="Pontuar">
+                                        <i class="glyphicon glyphicon-star"></i>
+                                    </a>
+                              </div>
+                              <div class="col-sm-4">
+                                <label for="tipo">Excelente</label>
+                                <a id="ponto5" style='color: yellow' href="#divForm" title="Pontuar">
+                                        <i class="glyphicon glyphicon-star"></i>
+                                    </a>
+                              </div>
+                        </div>
+
+                        <div class="form-group">
+                          <fieldset>
+                            <legend>Seu comentário</legend>
+                            <label for ="comentario"></label>
+                            <textarea cols=80 
+                                      id="comentario" 
+                                      rows="4" 
+                                      name="comentario" 
+                                      maxlength="500"
+                                      placeholder="Deixe seu comentário sobre esta cerveja...">
+                            </textarea>
+                          </fieldset>
+                        </div>
+                        <div class="btn-group text-right">
+                          <button id="btnSalvar" 
+                                  type="button" 
+                                  class="btn btn-primary">Salvar
+                          </button>
+                          <button id="btnCancelar"
+                                  type="reset" 
+                                  class="btn btn-primary">Cancelar
+                          </button>
+                        </div>
+                      </form>
                     <div class="table-responsive">
-                        <table class="table table-hover">
+                        <table id="tableFavorita" class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th>Cod.</th>
                                     <th>Cerveja</th>
                                     <th>Tipo</th>
-                                    
-                                    
-                                    
                                     <th></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{codigo}}</td>
                                     <td>{{cerveja}}</td>
                                     <td>{{tipo}}</td>
-                                    
-                                    
-                                    
                                     <td>
-                                        <a style='color: yellow' href="#divForm">
-                                            <i class="glyphicon glyphicon-star"></i>
+                                        <a id="pontuacao" style='color: yellow' href="#divForm" title="Pontuar">
+                                            <i class="glyphicon glyphicon-star"
+                                               onclick="favorita.abrirForm({{id}})"></i>
                                         </a>
-                                        <a style='color: yellow' href="#divForm">
-                                            <i class="glyphicon glyphicon-star"></i>
-                                        </a>
-                                        <a style='color: yellow' href="#divForm">
-                                            <i class="glyphicon glyphicon-star"></i>
-                                        </a>
-                                        <a style='color: yellow' href="#divForm">
-                                            <i class="glyphicon glyphicon-star"></i>
-                                        </a>
-                                        <a style='color: yellow' href="#divForm">
-                                            <i class="glyphicon glyphicon-star"></i>
-                                        </a>
-                                        <a href="#divForm">
-                                            <i class="glyphicon glyphicon-thumbs-up"></i>
+                                        <a href="#divForm" title="Favoritar">
+                                            <i class="glyphicon glyphicon-paperclip"
+                                               onclick="favorita.abrirForm({{id}})">
+                                            </i>
                                         </a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
-                        <!--<table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Cod.</th>
-                                    <th>Nome</th>
-                                    <th>Tipo</th>
-                                    <th>Família</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{{codigo}}</td>
-                                    <td>{{nome}}</td>
-                                    <td>{{tipo}}</td>
-                                    <td>{{familia}}</td>
-                                    <td>
-                                        <a style='color: yellow' href="#divForm"><span class="glyphicon glyphicon-star"></span></a>
-                                        <a style='color: yellow' href="#divForm"><span class="glyphicon glyphicon-star"></span></a>
-                                        <a style='color: yellow' href="#divForm"><span class="glyphicon glyphicon-star"></span></a>
-                                        <a style='color: yellow' href="#divForm"><span class="glyphicon glyphicon-star"></span></a>
-                                        <a style='color: yellow' href="#divForm"><span class="glyphicon glyphicon-star-empty"></span></a>
-                                        <a href="#divForm"><span class="glyphicon glyphicon-thumbs-up"></span></a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> -->
                     </div>
                 </div>
             </div>
