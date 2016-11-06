@@ -13,6 +13,8 @@ COMMENT ON COLUMN public.usuarios.id IS 'Identificador do registro';
 COMMENT ON COLUMN public.usuarios.nome IS 'Nome do usuário';
 COMMENT ON COLUMN public.usuarios.idade IS 'Idade do usuário';
 
+
+
 /* Tabela de acessos */
 CREATE TABLE public.acessos(
    id bigint, 
@@ -32,6 +34,8 @@ COMMENT ON COLUMN public.acessos.id IS 'Identificador do registro';
 COMMENT ON COLUMN public.acessos.i_usuario IS 'Identificador do usuário';
 COMMENT ON COLUMN public.acessos.login IS 'Login do usuário';
 COMMENT ON COLUMN public.acessos.senha IS 'Senha do usuário';
+
+
 
 /* Tabela de cervejas */
 CREATE TABLE public.cervejas(
@@ -57,6 +61,8 @@ COMMENT ON COLUMN public.cervejas.amargor IS 'Amargor da cerveja';
 COMMENT ON COLUMN public.cervejas.cor IS 'Cor da cerveja';
 COMMENT ON COLUMN public.cervejas.teor IS 'Teor ancoólico da cerveja';
 COMMENT ON COLUMN public.cervejas.observacao IS 'Observações';
+
+
 
 /* Tabela de cervejarias */
 CREATE TABLE public.cervejarias (
