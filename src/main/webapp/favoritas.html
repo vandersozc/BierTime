@@ -25,70 +25,67 @@
                 <div id="menu-lateral" class="col-sm-3 col-md-2 sidebar"></div>
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                     <h2 class="page-header">Cervejas favoritas</h2>
-
                     <form id="formFavorita" class="form-horizontal">
-                        <input type="hidden" name="id">
-                        <input type="hidden" name="cerveja">
-                        <input type="hidden" name="pontuacao">
-                        <input type="hidden" name="curtida">
-
                         <div class="form-group">
-                              <div class="col-sm-2">
-                                <label for="tipo">Péssima</label>
-                                <a id="ponto1" style='color: yellow' href="#divForm" title="Pontuar">
-                                        <i class="glyphicon glyphicon-star"></i>
-                                    </a>
-                              </div>
-                              <div class="col-sm-2">
-                                <label for="tipo">Ruim</label>
-                                <a id="ponto2" style='color: yellow' href="#divForm" title="Pontuar">
-                                        <i class="glyphicon glyphicon-star"></i>
-                                    </a>
-                              </div>
-                              <div class="col-sm-2">
-                                <label for="tipo">Boa</label>
-                                <a id="ponto3" style='color: yellow' href="#divForm" title="Pontuar">
-                                        <i class="glyphicon glyphicon-star"></i>
-                                    </a>
-                              </div>
-                              <div class="col-sm-2">
-                                <label for="tipo">Ótima</label>
-                                <a id="ponto4" style='color: yellow' href="#divForm" title="Pontuar">
-                                        <i class="glyphicon glyphicon-star"></i>
-                                    </a>
-                              </div>
-                              <div class="col-sm-4">
-                                <label for="tipo">Excelente</label>
-                                <a id="ponto5" style='color: yellow' href="#divForm" title="Pontuar">
-                                        <i class="glyphicon glyphicon-star"></i>
-                                    </a>
-                              </div>
+                            <input id="nomeCerveja"
+                                type="text" 
+                                name="nome" 
+                                class="form-control"
+                                disabled="disabled">
+                            <input type="hidden" name="id">
+                            <input type="hidden" name="cerveja">
+                            <input type="hidden" name="pontuacao">
+                            <input type="hidden" name="curtida">
+                            <label class="checkbox-inline">
+                            <input type="checkbox"
+                                   value="1"
+                                   id="ponto1">Péssima
+                            </label>
+                            <label class="checkbox-inline">
+                            <input type="checkbox"
+                                   value="2" 
+                                   id="ponto2">Ruim
+                            </label>
+                            <label class="checkbox-inline">
+                            <input type="checkbox"
+                                   value="3" 
+                                   id="ponto3">Boa
+                            </label>
+                            <label class="checkbox-inline">
+                            <input type="checkbox"
+                                   value="4" 
+                                   id="ponto4">Ótima
+                            </label>
+                            <label class="checkbox-inline">
+                            <input type="checkbox" 
+                                   value="5"
+                                   id="ponto5">Excelente
+                            </label>
                         </div>
-
                         <div class="form-group">
-                          <fieldset>
-                            <legend>Seu comentário</legend>
-                            <label for ="comentario"></label>
-                            <textarea cols=80 
-                                      id="comentario" 
-                                      rows="4" 
-                                      name="comentario" 
-                                      maxlength="500"
-                                      placeholder="Deixe seu comentário sobre esta cerveja...">
+                            <fieldset>
+                                <legend>Seu comentário</legend>
+                                <label for ="comentario"></label>
+                                <textarea cols=80 
+                                    id="comentario" 
+                                    rows="4" 
+                                    name="comentario" 
+                                    maxlength="500"
+                                    placeholder="Deixe seu comentário sobre esta cerveja...">
                             </textarea>
-                          </fieldset>
+                            </fieldset>
                         </div>
                         <div class="btn-group text-right">
-                          <button id="btnSalvar" 
-                                  type="button" 
-                                  class="btn btn-primary">Salvar
-                          </button>
-                          <button id="btnCancelar"
-                                  type="reset" 
-                                  class="btn btn-primary">Cancelar
-                          </button>
+                            <button id="btnSalvar" 
+                                type="button" 
+                                class="btn btn-primary">Salvar
+                            </button>
+                            <button id="btnCancelar"
+                                type="reset" 
+                                class="btn btn-primary">Cancelar
+                            </button>
                         </div>
-                      </form>
+                    </form>
                     <div class="table-responsive">
                         <table id="tableFavorita" class="table table-hover">
                             <thead>
@@ -104,13 +101,13 @@
                                     <td>{{tipo}}</td>
                                     <td>
                                         <a id="pontuacao" style='color: yellow' href="#divForm" title="Pontuar">
-                                            <i class="glyphicon glyphicon-star"
-                                               onclick="favorita.abrirForm({{id}})"></i>
+                                        <i class="glyphicon glyphicon-star"
+                                            onclick="favorita.abrirForm({{id}})"></i>
                                         </a>
                                         <a href="#divForm" title="Favoritar">
-                                            <i class="glyphicon glyphicon-paperclip"
-                                               onclick="favorita.abrirForm({{id}})">
-                                            </i>
+                                        <i class="glyphicon glyphicon-paperclip"
+                                            onclick="favorita.abrirForm({{id}})">
+                                        </i>
                                         </a>
                                     </td>
                                 </tr>

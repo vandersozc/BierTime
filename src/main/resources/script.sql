@@ -91,7 +91,7 @@ CREATE TABLE public.favoritas (
   CONSTRAINT pk_favoritas PRIMARY KEY (id),
   CONSTRAINT fk_favorita_cerveja FOREIGN KEY (i_cerveja)
       REFERENCES public.cervejas (id) MATCH SIMPLE
-      ON UPDATE NO ACTION ON DELETE NO ACTION
+      ON UPDATE NO ACTION ON DELETE CASCADE
 );
 CREATE SEQUENCE public.seq_favoritas;
 
